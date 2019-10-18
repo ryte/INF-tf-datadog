@@ -40,7 +40,7 @@ Add your AWS account in [Datadog](https://app.datadoghq.com/account/settings#int
 Add following code snippet to your stack
 ```hcl
 module "datadog" {
-  source      = "git@github.com:ryte/INF-tf-datadog.git?ref=v0.1.0"
+  source      = "github.com/ryte/INF-tf-datadog.git?ref=v0.1.0"
   external_id = "$yourAWSExternalIDinDatadog"
 }
 ```
@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "custom_policy" {
 }
 
 module "datadog" {
-  source        = "git@github.com:ryte/INF-tf-datadog.git?ref=v0.1.0"
+  source        = "github.com/ryte/INF-tf-datadog.git?ref=v0.1.0"
   external_id   = "$yourAWSExternalIDinDatadog"
   custom_policy = "${data.aws_iam_policy_document.custom_policy.json}"
 }
