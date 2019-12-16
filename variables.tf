@@ -4,6 +4,7 @@ variable "external_id" {
   description = <<EOF
   https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 EOF
+
 }
 
 variable "custom_policy" {
@@ -12,4 +13,6 @@ variable "custom_policy" {
   description = <<EOF
   https://docs.datadoghq.com/integrations/amazon_web_services/
 EOF
+
 }
+

@@ -1,5 +1,5 @@
 locals {
-  datadog_enable = "${length(var.external_id) > 0 ? 1 : 0}"
+  datadog_enable = length(var.external_id) > 0 ? 1 : 0
   role_name      = "DatadogAWSIntegrationRole"
 }
 
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "trust_policy" {
       variable = "sts:ExternalId"
 
       values = [
-        "${var.external_id}",
+        var.external_id,
       ]
     }
   }
@@ -97,19 +97,20 @@ data "aws_iam_policy_document" "policy_document" {
 }
 
 resource "aws_iam_policy" "policy" {
-  count  = "${local.datadog_enable}"
-  name   = "${local.role_name}"
-  policy = "${length(var.custom_policy) > 0 ? var.custom_policy : data.aws_iam_policy_document.policy_document.json}"
+  count  = local.datadog_enable
+  name   = local.role_name
+  policy = length(var.custom_policy) > 0 ? var.custom_policy : data.aws_iam_policy_document.policy_document.json
 }
 
 resource "aws_iam_role" "role" {
-  count              = "${local.datadog_enable}"
-  name               = "${local.role_name}"
-  assume_role_policy = "${data.aws_iam_policy_document.trust_policy.json}"
+  count              = local.datadog_enable
+  name               = local.role_name
+  assume_role_policy = data.aws_iam_policy_document.trust_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "attachment" {
-  count      = "${local.datadog_enable}"
-  policy_arn = "${aws_iam_policy.policy.arn}"
-  role       = "${aws_iam_role.role.name}"
+  count      = local.datadog_enable
+  policy_arn = aws_iam_policy.policy[0].arn
+  role       = aws_iam_role.role[0].name
 }
+
