@@ -1,3 +1,9 @@
+variable "tags" {
+  type        = map(string)
+  description = "common tags to add to the ressources"
+  default     = {}
+}
+
 variable "external_id" {
   default = ""
 
@@ -15,4 +21,3 @@ variable "custom_policy" {
 EOF
 
 }
-
