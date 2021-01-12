@@ -105,7 +105,7 @@ resource "aws_iam_policy" "policy" {
 resource "aws_iam_role" "role" {
   count              = local.datadog_enable
   name               = local.role_name
-  tags               = var.tags
+  tags               = local.tags
   assume_role_policy = data.aws_iam_policy_document.trust_policy.json
 }
 
