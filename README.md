@@ -15,15 +15,20 @@ and currently maintained by the [INF](https://github.com/orgs/ryte/teams/inf).
 
 ## Module Input Variables
 
+-  `custom_policy`
+    - __description__: Provide the Datadog integration with a custom set of permissions to limit or expand data collection
+    - __type__: `string`
+    - __default__: ""
+
 -  `external_id`
     - __description__: "AWS External ID" from the integration settings dialog in Datadog
     - __type__: `string`
     - __default__: ""
 
--  `custom_policy`
-    - __description__: Provide the Datadog integration with a custom set of permissions to limit or expand data collection
-    - __type__: `string`
-    - __default__: ""
+- `tags`
+    -  __description__: a map of tags which is added to all supporting ressources
+    -  __type__: `map`
+    -  __default__: {}
 
 ## Usage
 
@@ -40,7 +45,8 @@ Add your AWS account in [Datadog](https://app.datadoghq.com/account/settings#int
 Add following code snippet to your stack
 ```hcl
 module "datadog" {
-  source      = "github.com/ryte/INF-tf-datadog.git?ref=v0.2.0"
+  source      = "github.com/ryte/INF-tf-datadog.git?ref=v0.2.1"
+  tags        = local.common_tags
   external_id = "$yourAWSExternalIDinDatadog"
 }
 ```
@@ -55,7 +61,8 @@ data "aws_iam_policy_document" "custom_policy" {
 }
 
 module "datadog" {
-  source        = "github.com/ryte/INF-tf-datadog.git?ref=v0.2.0"
+  source        = "github.com/ryte/INF-tf-datadog.git?ref=v0.2.1"
+  tags          = local.common_tags
   external_id   = "$yourAWSExternalIDinDatadog"
   custom_policy = data.aws_iam_policy_document.custom_policy.json
 }
@@ -70,7 +77,8 @@ None
 
 ## Changelog
 
-- 0.2.0 - upgrade to terraform v0.12
+- 0.2.1 - Add tags to role
+- 0.2.0 - Upgrade to terraform v0.12
 - 0.1.0 - Initial release.
 
 ## License
