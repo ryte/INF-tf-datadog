@@ -13,23 +13,56 @@ NOTE: **This can increase the costs on Datadog and AWS heavilly.** Only include 
 This project is [internal open source](https://en.wikipedia.org/wiki/Inner_source)
 and currently maintained by the [INF](https://github.com/orgs/ryte/teams/inf).
 
-## Module Input Variables
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
 
--  `custom_policy`
-    - __description__: Provide the Datadog integration with a custom set of permissions to limit or expand data collection
-    - __type__: `string`
-    - __default__: ""
+The following requirements are needed by this module:
 
--  `external_id`
-    - __description__: "AWS External ID" from the integration settings dialog in Datadog
-    - __type__: `string`
-    - __default__: ""
+- terraform (>= 0.12)
 
-- `tags`
-    -  __description__: a map of tags which is added to all supporting ressources
-    -  __type__: `map`
-    -  __default__: {}
+## Providers
 
+The following providers are used by this module:
+
+- aws
+
+## Required Inputs
+
+No required input.
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### custom\_policy
+
+Description: Provide the Datadog integration with a custom set of permissions to limit or expand data collection (see [docs](https://docs.datadoghq.com/integrations/amazon_web_services/))
+
+Type: `string`
+
+Default: `""`
+
+### external\_id
+
+Description: 'AWS External ID' from the [integration settings dialog in Datadog](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
+
+Type: `string`
+
+Default: `""`
+
+### tags
+
+Description: common tags to add to the ressources
+
+Type: `map(string)`
+
+Default: `{}`
+
+## Outputs
+
+No output.
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Usage
 
 Add your AWS account in [Datadog](https://app.datadoghq.com/account/settings#integrations/amazon_web_services):
@@ -67,9 +100,6 @@ module "datadog" {
   custom_policy = data.aws_iam_policy_document.custom_policy.json
 }
 ```
-
-## Outputs
-None
 
 ## Authors
 

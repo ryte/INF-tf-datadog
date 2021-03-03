@@ -7,17 +7,12 @@ variable "tags" {
 variable "external_id" {
   default = ""
 
-  description = <<EOF
-  https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-EOF
-
+  description = "'AWS External ID' from the [integration settings dialog in Datadog](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)"
 }
 
 variable "custom_policy" {
   default = ""
 
-  description = <<EOF
-  https://docs.datadoghq.com/integrations/amazon_web_services/
-EOF
+  description = "Provide the Datadog integration with a custom set of permissions to limit or expand data collection (see [docs](https://docs.datadoghq.com/integrations/amazon_web_services/))"
 
 }
